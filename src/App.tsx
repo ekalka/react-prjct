@@ -1,26 +1,108 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Space, Table, Tag } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface DataType {
+  key: string;
+  name: string;
+  age: number;
+  address: string;
+  tags: string[];
+  id: number;
 }
+
+const columns: ColumnsType<DataType> = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
+    title: 'Tags',
+    key: 'tags',
+    dataIndex: 'tags',
+    render: (_, { tags }) => (
+      <>
+        {tags.map((tag) => {
+          let color = tag.length > 5 ? 'geekblue' : 'green';
+          if (tag === 'loser') {
+            color = 'volcano';
+          }
+          return (
+            <Tag color={color} key={tag}>
+              {tag.toUpperCase()}
+            </Tag>
+          );
+        })}
+      </>
+    ),
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (_, record) => (
+      <Space size="middle">
+        <a>Invite {record.name}</a>
+        <a>Delete</a>
+      </Space>
+    ),
+  },
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+  }
+];
+
+const data: DataType[] = [
+  {
+    key: '1',
+    name: 'John Brown',
+    age: 32,
+    address: 'New York No. 1 Lake Park',
+    tags: ['nice', 'developer'],
+    id: 1
+  },
+  {
+    key: '2',
+    name: 'Jim Green',
+    age: 42,
+    address: 'London No. 1 Lake Park',
+    tags: ['loser'],
+    id: 2
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    age: 32,
+    address: 'Sydney No. 1 Lake Park',
+    tags: ['cool', 'teacher'],
+    id: 3
+  },
+  {
+    key: '4',
+    name: 'Dmitryi Ovsov-Ploxohanov',
+    age: 20,
+    address: 'Pushkina St, 5',
+    tags: ['cool'],
+    id: 4
+  },
+];
+
+const App: React.FC = () => <Table columns={columns} dataSource={data} />;
+
+
 
 export default App;
