@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Table, Button } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import DataType from '../interfaces/data-type';
+import { useLoading } from '../hooks/useLoading';
 
 const columns: ColumnsType<DataType> = [
   {
@@ -21,6 +22,7 @@ const PaginationComponent: React.FC = () => {
   const [data, setData] = useState<DataType[]>([]);
   const [page, setPage] = useState<number>(1);
   const limit: number = 10;
+  const {setLoading} = useLoading();
 
   useEffect(() => {
     fetchData();
@@ -29,10 +31,14 @@ const PaginationComponent: React.FC = () => {
   const fetchData = async () => {
     const offset = (page - 1) * limit;
     try {
+      setLoading(true);
       const response = await axios.get(`http://universities.hipolabs.com/search?offset=${offset}&limit=${limit}`);
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data: ', error);
+      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
