@@ -21,15 +21,16 @@ const columns: ColumnsType<DataType> = [
 const PaginationComponent: React.FC = () => {
   const [data, setData] = useState<DataType[]>([]);
   const [page, setPage] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false); 
   const limit: number = 10;
   const {setLoading} = useLoading();
 
   useEffect(() => {
-    fetchData();
+    fetchData(); 
   }, [page]);
 
   const fetchData = async () => {
-    const offset = (page - 1) * limit;
+    setIsLoading(true); 
     try {
       setLoading(true);
       const response = await axios.get(`http://universities.hipolabs.com/search?offset=${offset}&limit=${limit}`);
@@ -56,9 +57,27 @@ const PaginationComponent: React.FC = () => {
 
   return (
     <>
-      <Table dataSource={data} columns={columns} pagination={false} />
-      <Button onClick={handlePrevPage} disabled={!offset}>Назад</Button>
-      <Button onClick={handleNextPage}>Вперед</Button>
+      <Table 
+        dataSource={data}
+        columns={columns} 
+        pagination={false}
+        loading={isLoading}
+      />
+
+      <Button 
+        onClick={handlePrevPage}
+        disabled={!offset || isLoading} 
+      >
+        Назад
+      </Button>
+
+      <Button
+        onClick={handleNextPage} 
+        disabled={isLoading}  
+      >
+        Вперед  
+      </Button>
+
       <span>Страница: {page}</span>
     </>
   );
