@@ -2,6 +2,27 @@ import React from "react";
 import { NavLink } from 'react-router-dom';
 import { HOME_ROUTE, STUD_ROUTE, ABOUT_ROUTE, PRJ_ROUTE } from "../routing/configs";
 import { useAuth } from "../hooks/useAuth";
+import {useCurrentTheme} from "../hooks/useCurrentTheme";
+import styled from "styled-components";
+
+const Button = styled.button`
+  color: --text-color;
+  width: 150px;
+  height: 50px;
+  border: 0;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+`;
+
+const ChangeThemeButton = styled.button`
+  color: --text-color;
+  width: 70px;
+  height: 50px;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+`;
 
 
 export const Navbar = () => {
@@ -10,7 +31,7 @@ export const Navbar = () => {
     const handleLogin = () => {
         setIsAuth(!isAuth);
     }
-
+    const { changeTheme } = useCurrentTheme();
     return (
             <header>
                 <nav>
@@ -19,6 +40,8 @@ export const Navbar = () => {
                     <NavLink className={'link'} to={PRJ_ROUTE}>Наши проекты</NavLink>
                     { isAuth && <NavLink className={'link'} to={STUD_ROUTE}>Наши студенты</NavLink> }
                     <button onClick={handleLogin}>{!isAuth ? 'Войти' : 'Выйти'}</button>
+                    <ChangeThemeButton onClick={() => changeTheme()}>
+                    </ChangeThemeButton>
                 </nav>
             </header>
     )
