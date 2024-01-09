@@ -1,11 +1,12 @@
 import React from 'react';
-import PaginationComponent from './core/components/pagComp';
-
+import { Navbar } from "./core/components/navbarComp";
+import { MainRouter } from "./core/routing/MainRouter";
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <PaginationComponent />
-    </div>
+    <>
+      <Navbar />
+      <MainRouter />
+    </>
   );
 };
 
