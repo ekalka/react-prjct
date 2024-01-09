@@ -3,6 +3,17 @@ import { IMyForm } from "../interfaces/form-type";
 import { useForms } from "../hooks/useForms";
 import styled from "styled-components";
 
+const FormInput = styled.input`
+  color: --text-color;
+  padding: 0.5rem 1.5rem;
+`
+
+const FormButton = styled.button`
+  color: --text-color;
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-radius: 5px;
+`
 
 export const About: React.FC = () => {
     const {tasks, setTasks} = useForms();
@@ -23,7 +34,7 @@ export const About: React.FC = () => {
         <form onSubmit={handleSubmit(saveElement)}>
             <label>
                 Имя:
-                <input
+                <FormInput
                     placeholder="Введите ваше имя"
                     type="text"
                     {...register("name", {
@@ -37,7 +48,7 @@ export const About: React.FC = () => {
             </label>
             <label>
                 Возраст:
-                <input
+                <FormInput
                     placeholder="Введите ваш возраст"
                     type="number"
                     {...register("age", {
@@ -51,7 +62,7 @@ export const About: React.FC = () => {
             </label>
             <label>
                 Почта:
-                <input
+                <FormInput
                     placeholder="Введите вашу почту"
                     type="email"
                     {...register("email", {
@@ -66,7 +77,7 @@ export const About: React.FC = () => {
             </label>
             <label>
                 Номер телефона:
-                <input
+                <FormInput
                     placeholder="Введите номер вашего телефона"
                     {...register("phoneNumber", {
                         required: "Обязательно к заполнению",
@@ -79,7 +90,7 @@ export const About: React.FC = () => {
                 />
             </label>
             <p>{errors.name?.message}</p>
-            <button disabled={!isValid} type="submit">Сохранить</button>
+            <FormButton disabled={!isValid} type="submit">Сохранить</FormButton>
             {tasks.map((task) => (
                 <p>
                     {task.name} - {task.age}

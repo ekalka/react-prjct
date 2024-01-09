@@ -36,7 +36,6 @@ export const useTable = () => {
     };
   
     const offset = (page - 1) * limit;
-    console.log(data)
   return ({
     data,
     isLoading,
