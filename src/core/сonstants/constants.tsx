@@ -13,3 +13,10 @@ export const columns: ColumnsType<DataType> = [
         key: 'name',
     },
 ];
+
+export interface IUniversityData {
+	name: string
+	country: string
+}
+
+export const LIMIT_LIST_SCHOOL = 15
