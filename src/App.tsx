@@ -5,9 +5,9 @@ import {GlobalStyles} from "./GlobalStyles";
 const App: React.FC = () => {
   return (
     <>
-      <GlobalStyles/>
-          <Navbar />
-          <MainRouter />
+        <GlobalStyles/>
+        <Navbar />
+        <MainRouter />
     </>
   );
 };
