@@ -1,4 +1,4 @@
 export interface IPdfData {
-	name: string
-	picture: FileList
+  name: string;
+  picture: FileList;
 }
