@@ -8,7 +8,7 @@ const PdfForm = () => {
   const [loading, setLoading] = useState(false);
   const [showLink, setShowLink] = useState(false);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     setLoading(true);
     setShowLink(false);
     generatePdfFile(data);
