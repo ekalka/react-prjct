@@ -3,7 +3,7 @@ import { IPdfData } from "../interfaces/pdfform-type";
 import { useForm } from "react-hook-form";
 
 export const useFormData = () => {
-  const [formData, setFormData] = useState<IPdfData>();
+  const [formData, setFormData] = useState<IPdfData | null>(null);
   const {
     handleSubmit,
     register,
